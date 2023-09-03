@@ -1,3 +1,4 @@
+import 'package:flutter_desempenho/models/task_model.dart';
 import 'package:mobx/mobx.dart';
 part 'task_store.store.g.dart';
 
@@ -7,11 +8,14 @@ abstract class TaskStoreBase with Store {
   @observable
   var _counter = 0;
 
+  @observable
+  ObservableList<TaskModel> _tasks = ObservableList<TaskModel>.of([]);
+
   @computed
-  int get counter => _counter;
+  List<TaskModel> get tasks => _tasks;
 
   @action
-  void increment() {
-    _counter++;
+  void addTask(TaskModel task) {
+    _tasks.add(task);
   }
 }

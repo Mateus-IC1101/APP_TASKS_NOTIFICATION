@@ -9,12 +9,13 @@ part of 'task_store.store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$TaskStore on TaskStoreBase, Store {
-  Computed<int>? _$counterComputed;
+  Computed<List<TaskModel>>? _$tasksComputed;
 
   @override
-  int get counter => (_$counterComputed ??=
-          Computed<int>(() => super.counter, name: 'TaskStoreBase.counter'))
-      .value;
+  List<TaskModel> get tasks =>
+      (_$tasksComputed ??= Computed<List<TaskModel>>(() => super.tasks,
+              name: 'TaskStoreBase.tasks'))
+          .value;
 
   late final _$_counterAtom =
       Atom(name: 'TaskStoreBase._counter', context: context);
@@ -32,15 +33,31 @@ mixin _$TaskStore on TaskStoreBase, Store {
     });
   }
 
+  late final _$_tasksAtom =
+      Atom(name: 'TaskStoreBase._tasks', context: context);
+
+  @override
+  ObservableList<TaskModel> get _tasks {
+    _$_tasksAtom.reportRead();
+    return super._tasks;
+  }
+
+  @override
+  set _tasks(ObservableList<TaskModel> value) {
+    _$_tasksAtom.reportWrite(value, super._tasks, () {
+      super._tasks = value;
+    });
+  }
+
   late final _$TaskStoreBaseActionController =
       ActionController(name: 'TaskStoreBase', context: context);
 
   @override
-  void increment() {
+  void addTask(TaskModel task) {
     final _$actionInfo = _$TaskStoreBaseActionController.startAction(
-        name: 'TaskStoreBase.increment');
+        name: 'TaskStoreBase.addTask');
     try {
-      return super.increment();
+      return super.addTask(task);
     } finally {
       _$TaskStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -49,7 +66,7 @@ mixin _$TaskStore on TaskStoreBase, Store {
   @override
   String toString() {
     return '''
-counter: ${counter}
+tasks: ${tasks}
     ''';
   }
 }
