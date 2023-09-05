@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desempenho/components/inputs/text_form_field_add_task.dart';
+import 'package:flutter_desempenho/components/tasks/temporary_task_list.dart';
 import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
 import 'package:flutter_desempenho/models/task_model.dart';
 import 'package:flutter_desempenho/store/task_store.store.dart';
@@ -19,7 +21,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            'Home',
+            'Crie Sua Tarefa',
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Color.fromARGB(255, 108, 47, 199),
@@ -35,20 +37,8 @@ class _HomePageState extends State<HomePage> {
                         Container(
                             width: 250,
                             height: 40,
-                            child: TextField(
-                                controller: _taskBodyController,
-                                decoration: InputDecoration(
-                                  hintText: 'Digite a Tarefa',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        color:
-                                            Color.fromARGB(255, 108, 47, 199)),
-                                    borderRadius: BorderRadius.circular(20.0),
-                                  ),
-                                ))),
+                            child: TextFormFieldAddTask(
+                                taskBodyController: _taskBodyController)),
                         SizedBox(
                           width: 10,
                         ),
@@ -75,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                           itemCount: taskStore.tasks.length,
                           itemBuilder: (context, index) {
                             TaskModel task_current = taskStore.tasks[index];
-                            return Text(task_current.conteudo);
+                            return TemporaryTaskList(
+                                task_current: task_current);
                           },
                         );
                       }),
