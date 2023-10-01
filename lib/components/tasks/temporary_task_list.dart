@@ -14,7 +14,7 @@ class TemporaryTaskList extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(16), // Preenchimento interno do card
         child: Text(
-          task_current.conteudo,
+          task_current.content,
           style: TextStyle(
             color: Colors.white, // Cor do texto
             fontSize: 16, // Tamanho da fonte

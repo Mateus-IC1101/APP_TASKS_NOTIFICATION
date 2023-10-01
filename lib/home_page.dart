@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                                       textString: _taskBodyController.text) !=
                                   '') {
                                 taskStore.addTask(TaskModel(
-                                    conteudo: _taskBodyController.text));
+                                    content: _taskBodyController.text));
                               }
 
                               _taskBodyController.text = '';
