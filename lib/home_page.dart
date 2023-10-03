@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desempenho/components/inputs/text_form_field_add_task.dart';
 import 'package:flutter_desempenho/components/tasks/temporary_task_list.dart';
+import 'package:flutter_desempenho/entities/task_entity.dart';
 import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
 import 'package:flutter_desempenho/models/task_model.dart';
+import 'package:flutter_desempenho/services/isar/isar_service.dart';
 import 'package:flutter_desempenho/store/task_store.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -16,6 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController _taskBodyController = TextEditingController();
   final taskStore = TaskStore();
+  final isar = IsarService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +28,18 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(color: Colors.white),
           ),
           backgroundColor: Color.fromARGB(255, 108, 47, 199),
+          actions: [
+            IconButton(
+              tooltip: 'Salvar Tarefas',
+              icon: Icon(
+                  Icons.save,
+                  color: Colors.white,
+                  size: 25.0),
+              onPressed: (){
+                isar.saveTask(TaskEntity()..content = 'teste');
+              }
+          ),
+          ],
         ),
         body: SingleChildScrollView(
             child: Container(
