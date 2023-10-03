@@ -15,7 +15,7 @@ abstract class TaskStoreBase with Store {
   List<TaskModel> get tasks => _tasks;
 
   @action
-  void addTask(TaskModel task) {
+  void addTask(TaskModel task) {  
     _tasks.add(task);
   }
 }

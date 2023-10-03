@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_desempenho/components/inputs/text_form_field_add_task.dart';
-import 'package:flutter_desempenho/components/tasks/temporary_task_list.dart';
-import 'package:flutter_desempenho/entities/task_entity.dart';
-import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
-import 'package:flutter_desempenho/models/task_model.dart';
-import 'package:flutter_desempenho/services/isar/isar_service.dart';
-import 'package:flutter_desempenho/store/task_store.store.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'package:flutter_desempenho/pages/task/create_task_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -16,77 +8,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final TextEditingController _taskBodyController = TextEditingController();
-  final taskStore = TaskStore();
-  final isar = IsarService();
+  final List<Widget> _pages = [
+    const CreateTaskPage(),
+    Container(color: Colors.green),
+    Container(color: Colors.blue),
+  ];
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            'Crie Sua Tarefa',
-            style: TextStyle(color: Colors.white),
+        body: _pages[_currentIndex], bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
-          backgroundColor: Color.fromARGB(255, 108, 47, 199),
-          actions: [
-            IconButton(
-              tooltip: 'Salvar Tarefas',
-              icon: Icon(
-                  Icons.save,
-                  color: Colors.white,
-                  size: 25.0),
-              onPressed: (){
-                isar.saveTask(TaskEntity()..content = 'teste');
-              }
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
           ),
-          ],
-        ),
-        body: SingleChildScrollView(
-            child: Container(
-                padding: EdgeInsets.all(10),
-                height: 3000,
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                            width: 250,
-                            height: 40,
-                            child: TextFormFieldAddTask(
-                                taskBodyController: _taskBodyController)),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              if (removeAllSpaces(
-                                      textString: _taskBodyController.text) !=
-                                  '') {
-                                taskStore.addTask(TaskModel(
-                                    content: _taskBodyController.text));
-                              }
-
-                              _taskBodyController.text = '';
-                            },
-                            child: Icon(Icons.add)),
-                      ],
-                    ),
-                    Expanded(
-                      child: Observer(builder: (_) {
-                        return ListView.builder(
-                          // shrinkWrap: true,
-                          // physics: NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          itemCount: taskStore.tasks.length,
-                          itemBuilder: (context, index) {
-                            TaskModel task_current = taskStore.tasks[index];
-                            return TemporaryTaskList(
-                                task_current: task_current);
-                          },
-                        );
-                      }),
-                    ),
-                  ],
-                ))));
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
+      ),);
   }
 }

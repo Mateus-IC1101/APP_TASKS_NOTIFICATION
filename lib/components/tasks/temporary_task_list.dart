@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desempenho/models/task_model.dart';
 
+// ignore: must_be_immutable
 class TemporaryTaskList extends StatelessWidget {
   TaskModel task_current;
   TemporaryTaskList({super.key, required this.task_current});
