@@ -7,6 +7,7 @@ import 'package:flutter_desempenho/models/task_model.dart';
 import 'package:flutter_desempenho/services/isar/isar_service.dart';
 import 'package:flutter_desempenho/store/task_store.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:provider/provider.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({super.key});
@@ -17,11 +18,11 @@ class CreateTaskPage extends StatefulWidget {
 
 class _CreateTaskPageState extends State<CreateTaskPage> {
   final TextEditingController _taskBodyController = TextEditingController();
-  final taskStore = TaskStore();
   final isar = IsarService();
   
   @override
   Widget build(BuildContext context) {
+    final taskStore = Provider.of<TaskStore>(context);
     return Scaffold(appBar:  AppBar(
       title: Text(
             'Crie Sua Tarefa',
