@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desempenho/constants/app_colors.dart';
 import 'package:flutter_desempenho/entities/task_entity.dart';
 import 'package:flutter_desempenho/store/temporary_task_store.store.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,7 @@ class TemporaryTaskList extends StatelessWidget {
   Widget build(BuildContext context) {
     final taskStore = Provider.of<TemporaryTaskStore>(context);
     return Card(
-      color: Color.fromARGB(255, 38, 38, 39),
+      color: AppColors.blackPrimary,
       elevation: 2, // Sombra do card
       margin: EdgeInsets.only(top: 10), // Margem ao redor do card
       child: Padding(
@@ -26,13 +27,13 @@ class TemporaryTaskList extends StatelessWidget {
           // softWrap: false,
         // maxLines: 3,
           style: TextStyle(
-            color: Colors.white, // Cor do texto
+            color: AppColors.whitePrimary, // Cor do texto
             fontSize: 16, // Tamanho da fonte
           ),
         ),),
         IconButton(onPressed: (){
           taskStore.removeTask(indexTask);
-        }, icon: Icon(Icons.delete, color: Colors.red, size: 30.0,))
+        }, icon: Icon(Icons.delete, color: AppColors.redPrimary, size: 30.0,))
         ],)
       ),
     );

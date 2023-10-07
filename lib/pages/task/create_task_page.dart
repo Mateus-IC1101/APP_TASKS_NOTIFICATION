@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_desempenho/components/inputs/text_form_field_add_task.dart';
 import 'package:flutter_desempenho/components/tasks/temporary_task_list.dart';
+import 'package:flutter_desempenho/constants/app_colors.dart';
 import 'package:flutter_desempenho/entities/task_entity.dart';
 import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
 import 'package:flutter_desempenho/services/isar/isar_service.dart';
@@ -23,17 +24,30 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   Widget build(BuildContext context) {
     final taskStore = Provider.of<TemporaryTaskStore>(context);
     return Scaffold(appBar:  AppBar(
-      title: Text(
-            'Crie Sua Tarefa',
-            style: TextStyle(color: Colors.white),
+      leading: IconButton(
+            icon: Icon(Icons.list_sharp, color: AppColors.orangePrimary, size: 30,),
+            tooltip: 'Open shopping cart',
+            onPressed: () {
+              // handle the press
+            },
           ),
-          backgroundColor: Color.fromARGB(255, 38, 38, 39),
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            'Crie Sua Tarefa',
+            style: TextStyle(color: AppColors.whitePrimary),
+          ),
+        
+        ],
+      ),
+          backgroundColor: AppColors.blackPrimary,
           actions: [
             IconButton(
               tooltip: 'Salvar Tarefas',
               icon: Icon(
                   Icons.save,
-                  color: Color.fromARGB(255, 226, 161, 10),
+                  color: AppColors.orangePrimary,
                   size: 25.0),
               onPressed: (){
                 isar.saveMultipleTask(taskStore.tasks);
@@ -41,7 +55,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           ),
           ],), body: SingleChildScrollView(
             child: Container(
-              color: Color.fromARGB(255, 88, 87, 89),
+              color: AppColors.blackSecondary,
                 padding: EdgeInsets.all(10),
                 height: 3000,
                 child: Column(
@@ -66,7 +80,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
                               _taskBodyController.text = '';
                             },
-                            child: Icon(Icons.add, color: Color.fromARGB(255, 226, 161, 10),)),
+                            child: Icon(Icons.add, color: AppColors.orangePrimary,)),
                       ],
                     ),
                     Expanded(
