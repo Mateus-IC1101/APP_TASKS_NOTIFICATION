@@ -5,7 +5,7 @@ import 'package:flutter_desempenho/entities/task_entity.dart';
 import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
 import 'package:flutter_desempenho/models/task_model.dart';
 import 'package:flutter_desempenho/services/isar/isar_service.dart';
-import 'package:flutter_desempenho/store/task_store.store.dart';
+import 'package:flutter_desempenho/store/temporary_task_store.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +22,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   
   @override
   Widget build(BuildContext context) {
-    final taskStore = Provider.of<TaskStore>(context);
+    final taskStore = Provider.of<TemporaryTaskStore>(context);
     return Scaffold(appBar:  AppBar(
       title: Text(
             'Crie Sua Tarefa',
@@ -37,7 +37,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   color: Colors.white,
                   size: 25.0),
               onPressed: (){
-                isar.saveTask(TaskEntity()..content = 'teste');
+                isar.saveMultipleTask(taskStore.tasks);
               }
           ),
           ],), body: SingleChildScrollView(
@@ -61,8 +61,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                               if (removeAllSpaces(
                                       textString: _taskBodyController.text) !=
                                   '') {
-                                taskStore.addTask(TaskModel(
-                                    content: _taskBodyController.text));
+                                taskStore.addTask(TaskEntity()..content = _taskBodyController.text);
                               }
 
                               _taskBodyController.text = '';
@@ -78,7 +77,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           scrollDirection: Axis.vertical,
                           itemCount: taskStore.tasks.length,
                           itemBuilder: (context, index) {
-                            TaskModel task_current = taskStore.tasks[index];
+                            TaskEntity task_current = taskStore.tasks[index];
                             return TemporaryTaskList(
                                 task_current: task_current);
                           },

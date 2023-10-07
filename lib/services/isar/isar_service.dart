@@ -20,9 +20,14 @@ class IsarService{
     return Future.value(Isar.getInstance());
   }
 
-  Future<void> saveTask(TaskEntity task) async{
+  Future<void> saveOneTask(TaskEntity task) async{
     final isar = await db;
     isar.writeTxnSync(() => isar.taskEntitys.putSync(task));
+    
+  }
+   Future<void> saveMultipleTask(List<TaskEntity> tasks) async{
+    final isar = await db;
+    isar.writeTxnSync(() => isar.taskEntitys.putAllSync(tasks));
     
   }
 }

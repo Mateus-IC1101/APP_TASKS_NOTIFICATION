@@ -19,6 +19,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _pages[_currentIndex], bottomNavigationBar: BottomNavigationBar(
+        // type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.amber,
+        backgroundColor: Color.fromARGB(255, 108, 47, 199),
         currentIndex: _currentIndex,
         onTap: (index) {
           setState(() {
@@ -27,12 +30,13 @@ class _HomePageState extends State<HomePage> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(Icons.add),
+            label: 'Criar Tarefa',
           ),
+         
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.calendar_month),
+            label: 'Cronograma',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
