@@ -3,7 +3,6 @@ import 'package:flutter_desempenho/components/inputs/text_form_field_add_task.da
 import 'package:flutter_desempenho/components/tasks/temporary_task_list.dart';
 import 'package:flutter_desempenho/entities/task_entity.dart';
 import 'package:flutter_desempenho/functions/strings/remove_all_spaces.dart';
-import 'package:flutter_desempenho/models/task_model.dart';
 import 'package:flutter_desempenho/services/isar/isar_service.dart';
 import 'package:flutter_desempenho/store/temporary_task_store.store.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -28,13 +27,13 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
             'Crie Sua Tarefa',
             style: TextStyle(color: Colors.white),
           ),
-          backgroundColor: Color.fromARGB(255, 108, 47, 199),
+          backgroundColor: Color.fromARGB(255, 38, 38, 39),
           actions: [
             IconButton(
               tooltip: 'Salvar Tarefas',
               icon: Icon(
                   Icons.save,
-                  color: Colors.white,
+                  color: Color.fromARGB(255, 226, 161, 10),
                   size: 25.0),
               onPressed: (){
                 isar.saveMultipleTask(taskStore.tasks);
@@ -42,6 +41,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
           ),
           ],), body: SingleChildScrollView(
             child: Container(
+              color: Color.fromARGB(255, 88, 87, 89),
                 padding: EdgeInsets.all(10),
                 height: 3000,
                 child: Column(
@@ -66,7 +66,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
                               _taskBodyController.text = '';
                             },
-                            child: Icon(Icons.add)),
+                            child: Icon(Icons.add, color: Color.fromARGB(255, 226, 161, 10),)),
                       ],
                     ),
                     Expanded(
@@ -79,7 +79,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           itemBuilder: (context, index) {
                             TaskEntity task_current = taskStore.tasks[index];
                             return TemporaryTaskList(
-                                task_current: task_current);
+                                task_current: task_current, indexTask: index,);
                           },
                         );
                       }),

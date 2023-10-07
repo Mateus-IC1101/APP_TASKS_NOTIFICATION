@@ -18,4 +18,9 @@ abstract class TemporaryTaskStoreBase with Store {
   void addTask(TaskEntity task) {  
     _tasks.add(task);
   }
+
+  @action
+  void removeTask(int indexTask) {  
+    _tasks.removeAt(indexTask);
+  }
 }

@@ -64,6 +64,17 @@ mixin _$TemporaryTaskStore on TemporaryTaskStoreBase, Store {
   }
 
   @override
+  void removeTask(int indexTask) {
+    final _$actionInfo = _$TemporaryTaskStoreBaseActionController.startAction(
+        name: 'TemporaryTaskStoreBase.removeTask');
+    try {
+      return super.removeTask(indexTask);
+    } finally {
+      _$TemporaryTaskStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 tasks: ${tasks}

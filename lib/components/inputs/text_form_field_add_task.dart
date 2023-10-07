@@ -12,18 +12,21 @@ class TextFormFieldAddTask extends StatelessWidget {
         controller: taskBodyController,
         decoration: InputDecoration(
           labelText: 'Tarefa',
+          labelStyle: TextStyle(color: Colors.white),
           // hintText: 'Digite a Tarefa',
           prefixIcon: Icon(
             Icons.task,
-            color: Color.fromARGB(255, 108, 47, 199),
+            color: Color.fromARGB(255, 226, 161, 10),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Color.fromARGB(255, 108, 47, 199)),
+            borderSide: BorderSide(color: Color.fromARGB(255, 226, 161, 10)),
             borderRadius: BorderRadius.circular(15.0),
           ),
+          focusColor: Colors.red,
+          hoverColor: Colors.red,
         ));
   }
 }
