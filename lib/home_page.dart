@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_desempenho/constants/app_colors.dart';
 import 'package:flutter_desempenho/pages/task/create_task_page.dart';
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: _pages[_currentIndex], bottomNavigationBar: BottomNavigationBar(
+      body: _pages[_currentIndex], 
+        bottomNavigationBar: BottomNavigationBar(
         // type: BottomNavigationBarType.fixed,
         unselectedItemColor: Color.fromARGB(255, 255, 255, 255),
         selectedItemColor: Color.fromARGB(255, 255, 255, 255),

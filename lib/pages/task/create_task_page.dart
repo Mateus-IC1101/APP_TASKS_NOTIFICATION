@@ -19,16 +19,20 @@ class CreateTaskPage extends StatefulWidget {
 class _CreateTaskPageState extends State<CreateTaskPage> {
   final TextEditingController _taskBodyController = TextEditingController();
   final isar = IsarService();
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
   
   @override
   Widget build(BuildContext context) {
     final taskStore = Provider.of<TemporaryTaskStore>(context);
-    return Scaffold(appBar:  AppBar(
+    return Scaffold(
+      key: _key,
+       drawer: const NavigationDrawer(), 
+      appBar:  AppBar(
       leading: IconButton(
             icon: Icon(Icons.list_sharp, color: AppColors.orangePrimary, size: 30,),
             tooltip: 'Open shopping cart',
             onPressed: () {
-              // handle the press
+              _key.currentState!.openDrawer();
             },
           ),
       title: Row(
@@ -101,4 +105,50 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   ],
                 ))));
   }
+}
+
+class NavigationDrawer extends StatelessWidget {
+  const NavigationDrawer({super.key});
+
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            buildHeader(context),
+            buildMenuItems(context)
+          ],
+
+      )),
+    );
+  }
+  Widget buildHeader(BuildContext context) => Container(
+    padding: EdgeInsets.only(top: 40, bottom: 20),
+    color: AppColors.blackPrimary,
+    child: Column(children: [
+      CircleAvatar(
+        child: Text('Mateus Dev'),
+        backgroundColor: AppColors.orangePrimary,
+        radius: 50,
+      ),
+     Container( margin: EdgeInsets.only(top: 15), child:  Text('O meu talento é ser esforçado!', style: TextStyle(color: AppColors.whitePrimary),))
+    ],),
+  );
+  Widget buildMenuItems(BuildContext context) => Container(child: Column(
+    children: [
+      ListTile(
+        leading: Icon(Icons.people),
+        title: Text('Tarefas Z'),
+      ),
+       ListTile(
+        leading: Icon(Icons.people),
+        title: Text('Tarefas A'),
+      ),
+       ListTile(
+        leading: Icon(Icons.people),
+        title: Text('Tarefas B'),
+      )
+    ],
+  ),);
 }
