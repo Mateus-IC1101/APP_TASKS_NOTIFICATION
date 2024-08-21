@@ -7,5 +7,6 @@ part 'task_entity.g.dart';
 class TaskEntity {
   Id id = Isar.autoIncrement;
   late String content;
-
+  late String dateNotification;
+  late String timeNotification;
 }
